@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-// import 'package:voter/secondScreen.dart';
-import 'package:voter/qrpage.dart';
+import 'package:voter/home.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+// import 'package:voter/secondScreen.dart';
+// import 'package:voter/home.dart';
+import 'package:voter/loginpage.dart';
+
+class QrPage extends StatefulWidget {
+  const QrPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<QrPage> createState() => _QrPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _QrPageState extends State<QrPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/voterlogo.png',
+                          'assets/images/qr-scan.gif',
                           width: 280,
                           height: 250,
                           fit: BoxFit.contain,
@@ -73,13 +76,34 @@ class _LoginPageState extends State<LoginPage> {
                             // Within the SecondScreen widget
                             onPressed: () {
                               // Navigate to the second screen using a named route.
+                              Navigator.pop(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const LoginPage())));
+                            },
+                            label: const Text(
+                              'Home',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            // icon: const Icon(Icons.thumb_up),
+                            backgroundColor: Colors.orange,
+                          ),
+                        ),
+                        Center(
+                          child: FloatingActionButton.extended(
+                            // Within the SecondScreen widget
+                            onPressed: () {
+                              // Navigate to the second screen using a named route.
+                              // _MyCustomWidgetState;
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: ((context) => const QrPage())));
+                                      builder: ((context) =>
+                                          const MyCustomWidget())));
                             },
                             label: const Text(
-                              'Ready TO Vote',
+                              'Scan Your Qr ID',
                               style: TextStyle(fontSize: 20),
                             ),
                             // icon: const Icon(Icons.thumb_up),
