@@ -8,13 +8,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  static const TextStyle myTextStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Montserrat',
-    color: Colors.black,
-  );
-
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -40,64 +33,23 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 20),
                     const Center(
                       child: Text(
-                        "Voter!",
+                        "Welcome Voters!",
                         style: TextStyle(
-                            fontSize: 50,
-                            color: Color.fromARGB(255, 61, 32, 194)),
+                            fontSize: 27,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: "Enter your Phone Number"),
-                      style: myTextStyle,
-                      validator: ((value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[+977]*[0-9]+$').hasMatch(value)) {
-                          return "Enter correct Number";
-                        } else {
-                          return null;
-                        }
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      decoration:
-                          const InputDecoration(labelText: "Enter your Email"),
-                      style: myTextStyle,
-                      validator: ((value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-                                .hasMatch(value)) {
-                          return "Enter correct email";
-                        } else {
-                          return null;
-                        }
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      decoration:
-                          const InputDecoration(labelText: "Enter your name"),
-                      style: myTextStyle,
-                      validator: ((value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                          return "Enter correct name";
-                        } else {
-                          return null;
-                        }
-                      }),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    Center(
+                        child: Image.asset(
+                      "voterlogo.png",
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    )),
                     // Center(
                     //   child: ElevatedButton(
                     //     onPressed: () {},
@@ -111,20 +63,21 @@ class _LoginPageState extends State<LoginPage> {
                       height: 10,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Sign up ",
-                          style: myTextStyle,
+                        Center(
+                          child: FloatingActionButton.extended(
+                            onPressed: () {
+                              // Add your onPressed code here!
+                            },
+                            label: const Text(
+                              'Ready TO Vote',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            // icon: const Icon(Icons.thumb_up),
+                            backgroundColor: Colors.pink,
+                          ),
                         ),
-                        FloatingActionButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // Form is valid, do something here
-                            }
-                          },
-                          child: const Icon(Icons.arrow_right_alt),
-                        )
                       ],
                     ),
                     const SizedBox(
@@ -136,6 +89,30 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FabExample extends StatelessWidget {
+  const FabExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('FloatingActionButton Sample'),
+      ),
+      body: const Center(
+        child: Text('Press the button with a label below!'),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: const Text('Approve'),
+        icon: const Icon(Icons.thumb_up),
+        backgroundColor: Colors.pink,
       ),
     );
   }
