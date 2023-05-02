@@ -16,12 +16,19 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: const Text('QR Scanner'),
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+            Image.asset(
+                          'assets/images/qr-scan.gif',
+                          width: 280,
+                          height: 350,
+                          fit: BoxFit.contain,
+                        ),
           ElevatedButton(
             onPressed: () {
               scanQRCode();

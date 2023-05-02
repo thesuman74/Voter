@@ -59,8 +59,8 @@ class _QrPageState extends State<QrPage> {
                       children: [
                         Image.asset(
                           'assets/images/qr-scan.gif',
-                          width: 280,
-                          height: 250,
+                          width: 310,
+                          height: 350,
                           fit: BoxFit.contain,
                         ),
                       ],
