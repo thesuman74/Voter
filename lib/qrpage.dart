@@ -1,127 +1,252 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:voter/home.dart';
 
-// import 'package:voter/secondScreen.dart';
-// import 'package:voter/home.dart';
-import 'package:voter/loginpage.dart';
+void main() => runApp(const MaterialApp(home: MyHome()));
 
-class QrPage extends StatefulWidget {
-  const QrPage({super.key});
+class MyHome extends StatelessWidget {
+  const MyHome({Key? key}) : super(key: key);
 
-  @override
-  State<QrPage> createState() => _QrPageState();
-}
-
-class _QrPageState extends State<QrPage> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: Colors.orange,
-          title: const Text("Login Page"),
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Qr scanning For web'),
+        backgroundColor: Colors.orange,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    const Center(
-                      child: Text(
-                        "Welcome Voters!",
-                        style: TextStyle(
-                            fontSize: 27,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const Center(
-                      child: Text(
-                        "Voting is not only our right, it is our power.",
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black45,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/qr-scan.gif',
-                          width: 310,
-                          height: 350,
-                          fit: BoxFit.contain,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: FloatingActionButton.extended(
-                            // Within the SecondScreen widget
-                            onPressed: () {
-                              // Navigate to the second screen using a named route.
-                              Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const LoginPage())));
-                            },
-                            label: const Text(
-                              'Home',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            // icon: const Icon(Icons.thumb_up),
-                            backgroundColor: Colors.orange,
-                          ),
-                        ),
-                        Center(
-                          child: FloatingActionButton.extended(
-                            // Within the SecondScreen widget
-                            onPressed: () {
-                              // Navigate to the second screen using a named route.
-                              // _MyCustomWidgetState;
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const MyCustomWidget())));
-                            },
-                            label: const Text(
-                              'Scan Your Qr ID',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            // icon: const Icon(Icons.thumb_up),
-                            backgroundColor: Colors.orange,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+            const Center(
+              child: Text(
+                "Welcome Voters!",
+                style: TextStyle(
+                    fontSize: 27,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Center(
+              child: Text(
+                "Voting is not only our right, it is our power.",
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black45,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Image.asset(
+              'assets/images/qr-scan.gif',
+              width: 280,
+              height: 350,
+              fit: BoxFit.fitHeight,
+            ),
+            Center(
+              child: FloatingActionButton.extended(
+                heroTag: 'unique',
+                // Within the SecondScreen widget
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MyCustomWidget(),
+                  ));
+                },
+                label: const Text(
+                  'Ready TO Vote',
+                  style: TextStyle(fontSize: 20),
                 ),
+                // icon: const Icon(Icons.thumb_up),
+                backgroundColor: Colors.orange,
+              ),
+            ),
+            Center(
+              child: FloatingActionButton.extended(
+                // Within the SecondScreen widget
+                onPressed: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const QRViewExample(),
+                  ));
+                },
+                label: const Text(
+                  'web',
+                  style: TextStyle(fontSize: 20),
+                ),
+                // icon: const Icon(Icons.thumb_up),
+                backgroundColor: Colors.orange,
               ),
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class QRViewExample extends StatefulWidget {
+  const QRViewExample({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _QRViewExampleState();
+}
+
+class _QRViewExampleState extends State<QRViewExample> {
+  Barcode? result;
+  QRViewController? controller;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    }
+    controller!.resumeCamera();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Expanded(flex: 4, child: _buildQrView(context)),
+          Expanded(
+            flex: 1,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  if (result != null)
+                    Text(
+                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                  else
+                    const Text('Scan a code'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              await controller?.toggleFlash();
+                              setState(() {});
+                            },
+                            child: FutureBuilder(
+                              future: controller?.getFlashStatus(),
+                              builder: (context, snapshot) {
+                                return Text('Flash: ${snapshot.data}');
+                              },
+                            )),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              await controller?.flipCamera();
+                              setState(() {});
+                            },
+                            child: FutureBuilder(
+                              future: controller?.getCameraInfo(),
+                              builder: (context, snapshot) {
+                                if (snapshot.data != null) {
+                                  return Text(
+                                      'Camera facing ${describeEnum(snapshot.data!)}');
+                                } else {
+                                  return const Text('loading');
+                                }
+                              },
+                            )),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await controller?.pauseCamera();
+                          },
+                          child: const Text('Pause',
+                              style: TextStyle(fontSize: 20)),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await controller?.resumeCamera();
+                          },
+                          child: const Text('Resume',
+                              style: TextStyle(fontSize: 20)),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQrView(BuildContext context) {
+    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
+    var scanArea = (MediaQuery.of(context).size.width < 400 ||
+            MediaQuery.of(context).size.height < 400)
+        ? 150.0
+        : 300.0;
+    // To ensure the Scanner view is properly sizes after rotation
+    // we need to listen for Flutter SizeChanged notification and update controller
+    return QRView(
+      key: qrKey,
+      onQRViewCreated: _onQRViewCreated,
+      overlay: QrScannerOverlayShape(
+          borderColor: Colors.red,
+          borderRadius: 10,
+          borderLength: 30,
+          borderWidth: 10,
+          cutOutSize: scanArea),
+      onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
+    );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    setState(() {
+      this.controller = controller;
+    });
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+      });
+    });
+  }
+
+  void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
+    log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+    if (!p) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('no Permission')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }
