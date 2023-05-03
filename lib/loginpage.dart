@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:voter/home.dart';
 // import 'package:voter/secondScreen.dart';
-import 'package:voter/qrpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -76,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: ((context) => const QrPage())));
+                                      builder: ((context) =>
+                                          const MyCustomWidget())));
                             },
                             label: const Text(
                               'Ready TO Vote',

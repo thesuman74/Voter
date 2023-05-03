@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voter/home.dart';
+// import 'package:voter/home.dart';
+import 'package:voter/loginpage.dart';
 // import 'package:voter/loginpage.dart';
 
 void main() => runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.orangeAccent,
       ),
-      home: const MyCustomWidget(),
+      home: const LoginPage(),
     );
   }
 }

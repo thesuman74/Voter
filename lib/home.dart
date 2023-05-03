@@ -20,27 +20,53 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
         title: const Text('QR Scanner'),
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+          child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Center(
+              child: Text(
+                "Welcome Voters!",
+                style: TextStyle(
+                    fontSize: 27,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Center(
+              child: Text(
+                "Voting is not only our right, it is our power.",
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black45,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             Image.asset(
-                          'assets/images/qr-scan.gif',
-                          width: 280,
-                          height: 350,
-                          fit: BoxFit.contain,
-                        ),
-          ElevatedButton(
-            onPressed: () {
-              scanQRCode();
-            },
-            child: const Text('Scan QR'),
-          ),
-          
-          const SizedBox(
-            height: 20.0,
-          ),
-          Text(getResult),
-        ],
+              'assets/images/qr-scan.gif',
+              width: 280,
+              height: 350,
+              fit: BoxFit.fitHeight,
+            ),
+            FloatingActionButton.extended(
+              // Within the SecondScreen widget
+              onPressed: () {
+                scanQRCode();
+              },
+              label: const Text(
+                'Scan Your ID',
+                style: TextStyle(fontSize: 20),
+              ),
+              // icon: const Icon(Icons.thumb_up),
+              backgroundColor: Colors.orange,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Text(getResult),
+          ],
+        ),
       )),
     );
   }
@@ -55,8 +81,6 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
       setState(() {
         getResult = qrCode;
       });
-      // print("QRCode_Result:--");
-      // print(qrCode);
     } on PlatformException {
       getResult = 'Failed to scan QR Code.';
     }
