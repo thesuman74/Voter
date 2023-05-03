@@ -35,6 +35,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
             },
             child: const Text('Scan QR'),
           ),
+          
           const SizedBox(
             height: 20.0,
           ),
