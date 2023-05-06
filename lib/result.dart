@@ -72,7 +72,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
               ),
               Text(
                 getResult.split(',').join('\n'),
-                style: TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.blue),
               ),
             ],
           ),
