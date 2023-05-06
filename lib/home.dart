@@ -64,13 +64,17 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
             const SizedBox(
               height: 20.0,
             ),
-            Text(getResult),
+            Text(
+              getResult.split(',').join('\n'),
+              style: const TextStyle(color: Colors.blue),
+            ),
           ],
         ),
       )),
     );
   }
 
+  
   void scanQRCode() async {
     try {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voter/qrpage.dart';
+import 'package:voter/home.dart';
 // import 'package:voter/home.dart';
 // import 'package:voter/secondScreen.dart';
 
@@ -77,7 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: ((context) => const MyHome())));
+                                      builder: ((context) =>
+                                          const MyCustomWidget())));
                             },
                             label: const Text(
                               'Ready to vote ',
@@ -90,25 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           width: 10,
                         ),
-                        // Center(
-                        //   child: FloatingActionButton.extended(
-                        //     // Within the SecondScreen widget
-                        //     onPressed: () {
-                        //       // Navigate to the second screen using a named route.
-                        //       Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: ((context) =>
-                        //                   const MyCustomWidget())));
-                        //     },
-                        //     label: const Text(
-                        //       'mobile',
-                        //       style: TextStyle(fontSize: 20),
-                        //     ),
-                        //     // icon: const Icon(Icons.thumb_up),
-                        //     backgroundColor: Colors.orange,
-                        //   ),
-                        // ),
                       ],
                     ),
                     const SizedBox(
