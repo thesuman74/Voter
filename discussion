@@ -1,0 +1,36 @@
+admin login =>poll name ==> add candiddate ==>save poll ==> start poll (optional) ==> counter page ==>  final page 
+        forma page 
+
+user Qr login ==> view poll ==>  candidate page ==> vote sucess==> view poll 
+              ==> poll name 
+
+    Qr==> name , roll no 
+
+
+Authentication
+ vote success ==> data entry (roll no,) ==> voter_list 
+
+ qr scan ==>(check in voter_list ) if roll absent   ==> candidate page ==> select candidate ==> ((biometrics)) ==> vote sucess ==> data entry
+              if  roll present ==> already voted. 
+
+  biometrics ==> candidate select ==> bio metric alret ==> accepted ==> vote succesful 
+                                                            reject ==> candidate select
+
+
+database 
+  admin ==> id  email password
+    candidate_table =-=>id name post photo 
+    poll_list ==> id poll_name  (gces votoing , pu voting)
+    counter_table  ==> candidate_table + counter value ==> id(foreging key)==> counter_value
+    -- final_result ==> ascending (counter_table)
+
+
+    view poll ==> poll list 
+    candidate page ==> candidatae_table  
+    final_result ==> ascending (counter_table)
+
+
+assignee 
+ paudel ==> counter page , 
+ acharya ==> database tables , 
+ suman ==> final page, poll name 
