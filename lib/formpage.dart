@@ -21,7 +21,6 @@ class Myform extends StatefulWidget {
 
 class _MyformState extends State<Myform> {
   //for image
-  // TextEditingController caption = TextEditingController();
   File? imagepath;
   String? imagename;
   String? imagedata;
@@ -34,6 +33,14 @@ class _MyformState extends State<Myform> {
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  void resetImage() {
+    setState(() {
+      imagepath = null;
+      imagename = null;
+      imagedata = null;
+    });
+  }
 
   Future<void> insertrecord() async {
     if (name.text != "" || email.text != "" || password.text != "") {
@@ -53,6 +60,8 @@ class _MyformState extends State<Myform> {
           name.text = "";
           email.text = "";
           password.text = "";
+          resetImage(); // Call resetImage to clear the image
+          print("form cleared  successfully");
         } else {
           print("some issues while inserting ");
         }
@@ -97,7 +106,6 @@ class _MyformState extends State<Myform> {
       imagepath = File(getimage!.path);
       imagename = getimage.path.split('/').last;
       imagedata = base64Encode(imagepath!.readAsBytesSync());
-      // print("Caption: ${caption.text}");
       print("ImageData: $imagedata");
       print("ImageName: $imagename");
     });
