@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:voter/view_data.dart';
 
-import 'dart:convert';
 import 'dart:io';
 // Add this import for Size class
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
 
 class Myform extends StatefulWidget {
   const Myform({super.key});
@@ -168,7 +165,7 @@ class _MyformState extends State<Myform> {
                             .contain, // Use BoxFit to fit the image within constraints
                       ),
                     )
-                  : Text('Image not chosen yet'),
+                  : const Text('Image not chosen yet'),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

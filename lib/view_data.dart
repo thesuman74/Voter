@@ -80,14 +80,14 @@ class _view_dataState extends State<view_data> {
                                 userdata[index]["uemail"],
                                 userdata[index]["upassword"])));
                   },
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.add,
                     color: Colors.red,
                   ),
                   title: Text(userdata[index]["uname"]),
                   subtitle: Text(userdata[index]['uemail']),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       delrecord(userdata[index]["id"]);
                     },
@@ -97,5 +97,3 @@ class _view_dataState extends State<view_data> {
             }));
   }
 }
-
-

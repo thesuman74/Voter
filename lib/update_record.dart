@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:voter/view_data.dart';
 import 'package:voter/formpage.dart';
 
 class update_record extends StatefulWidget {
@@ -36,7 +35,7 @@ class _update_recordState extends State<update_record> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                Myform(), // Replace with the actual name of your FormPage widget
+                const Myform(), // Replace with the actual name of your FormPage widget
           ),
         );
       } else {
