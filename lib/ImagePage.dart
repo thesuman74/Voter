@@ -26,7 +26,6 @@ class _ImageInsertState extends State<ImageInsert> {
     try {
       String uri = "http://10.0.2.2/practice_api/imageupload.php";
       var res = await http.post(Uri.parse(uri), body: {
-        "caption": caption.text,
         "data": imagedata,
         "name": imagename
       });
