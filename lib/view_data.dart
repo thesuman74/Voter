@@ -62,38 +62,46 @@ class _view_dataState extends State<view_data> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("view data"),
-        ),
-        body: ListView.builder(
-            itemCount: userdata.length,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: const EdgeInsets.all(8),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => update_record(
-                                userdata[index]["uname"],
-                                userdata[index]["uemail"],
-                                userdata[index]["upassword"])));
-                  },
-                  leading: const Icon(
-                    Icons.add,
-                    color: Colors.red,
+      appBar: AppBar(
+        title: const Text("view data"),
+      ),
+      body: ListView.builder(
+        itemCount: userdata.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.all(8),
+            child: ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => update_record(
+                      userdata[index]["uname"],
+                      userdata[index]["uemail"],
+                      userdata[index]["upassword"],
+                    ),
                   ),
-                  title: Text(userdata[index]["uname"]),
-                  subtitle: Text(userdata[index]['uemail']),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      delrecord(userdata[index]["id"]);
-                    },
-                  ),
-                ),
-              );
-            }));
+                );
+              },
+              leading: Image.network(
+                'http://10.0.2.2/practice_api/' + userdata[index]["image_path"],
+                width: 100, // Set the width as needed
+                height: 100, // Set the height as needed
+                fit: BoxFit
+                    .scaleDown, // Optional: Adjust the image fit as needed
+              ),
+              title: Text(userdata[index]["uname"]),
+              subtitle: Text(userdata[index]['uemail']),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  delrecord(userdata[index]["id"]);
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

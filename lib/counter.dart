@@ -47,7 +47,7 @@ class _MyCounterState extends State<MyCounter> {
         child: ListView.builder(
           itemCount: 2,
           shrinkWrap: true,
-          itemBuilder: (BuildContext context, index) => Container(
+          itemBuilder: (BuildContext context, index) => Container(  
             width: MediaQuery.of(context).size.width,
             padding:
                 const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
