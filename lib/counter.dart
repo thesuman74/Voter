@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:voter/update_record.dart';
 
 class MyCounter extends StatefulWidget {
   const MyCounter({super.key});
@@ -9,6 +14,28 @@ class MyCounter extends StatefulWidget {
 }
 
 class _MyCounterState extends State<MyCounter> {
+  List userdata = [];
+
+  Future<void> getrecord() async {
+    String uri = "http://10.0.2.2/practice_api/view_data.php";
+
+    try {
+      var response = await http.get(Uri.parse(uri));
+
+      setState(() {
+        userdata = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getrecord();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +45,7 @@ class _MyCounterState extends State<MyCounter> {
       body: Padding(
         padding: const EdgeInsets.only(left: 0, top: 5),
         child: ListView.builder(
-          itemCount: 6,
+          itemCount: 2,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, index) => Container(
             width: MediaQuery.of(context).size.width,
@@ -57,7 +84,7 @@ class _MyCounterState extends State<MyCounter> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              data[index]['name'],
+                              userdata[index]['uname'],
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.0,
