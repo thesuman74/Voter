@@ -44,7 +44,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                 ),
               ),
               Image.asset(
-                'assets/images/qr-scan.gif',
+                'assets/qr-scan.gif',
                 width: 280,
                 height: 350,
                 fit: BoxFit.fitHeight,
