@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'data.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:voter/update_record.dart';
 
 class MyCounter extends StatefulWidget {
   const MyCounter({super.key});
@@ -45,9 +43,9 @@ class _MyCounterState extends State<MyCounter> {
       body: Padding(
         padding: const EdgeInsets.only(left: 0, top: 5),
         child: ListView.builder(
-          itemCount: 2,
+          itemCount: 6,
           shrinkWrap: true,
-          itemBuilder: (BuildContext context, index) => Container(  
+          itemBuilder: (BuildContext context, index) => Container(
             width: MediaQuery.of(context).size.width,
             padding:
                 const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),

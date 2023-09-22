@@ -70,7 +70,7 @@ class _MyLoginState extends State<MyLogin> {
                             child: IconButton(
                               color: Colors.white,
                               onPressed: () {
-                                Navigator.pushNamed(context, 'counter');
+                                Navigator.pushNamed(context, 'candidates');
                               },
                               icon: const Icon(Icons.arrow_forward),
                             ),
