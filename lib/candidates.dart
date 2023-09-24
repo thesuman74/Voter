@@ -58,7 +58,24 @@ class _CandidatesState extends State<Candidates> {
                             ),
                             child: Stack(
                               children: [
-                                Image.network(data[index]['image'] ?? '')
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, 'success');
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        12.0), // Adjust the radius as needed
+                                    child: Image.network(
+                                      data[index]['image'] ??
+                                          '', // Replace with your image URL
+                                      width: 200, // Set the width of the image
+                                      height:
+                                          200, // Set the height of the image
+                                      fit: BoxFit
+                                          .cover, // Set how the image should be fitted within its constraints
+                                    ),
+                                  ),
+                                )
                               ], // Provide a default empty string in case 'image' is null
                             ),
                           ),
@@ -71,19 +88,18 @@ class _CandidatesState extends State<Candidates> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'success');
-                          },
-                          child: const Text(
-                            'Click Here To Vote',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     Navigator.pushNamed(context, 'success');
+                        //   },
+                        //   child: const Text(
+                        //     'Click Here To Vote',
+                        //     style: TextStyle(
+                        //       fontSize: 16,
+                        //       color: Color.fromARGB(255, 0, 0, 0),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     );
                   },
