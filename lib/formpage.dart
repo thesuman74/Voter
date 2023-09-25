@@ -6,9 +6,9 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class Myform extends StatefulWidget {
-  final String? PollName;
+  final String? passedValue;
 
-  Myform({this.PollName});
+  Myform({this.passedValue});
 
   @override
   State<Myform> createState() => _MyformState();
@@ -110,7 +110,7 @@ class _MyformState extends State<Myform> {
             children: [
               Container(
                 margin: const EdgeInsets.all(8),
-                child: Text('Received Data: ${widget.PollName}'),
+                child: Text('Received Data: ${widget.passedValue}'),
               ),
               Container(
                 margin: const EdgeInsets.all(8),

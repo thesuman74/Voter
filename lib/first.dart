@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:voter/second.dart';
 
 class FirstPage extends StatelessWidget {
-  final TextEditingController poll_data = TextEditingController();
-
-  
+  final TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class FirstPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: poll_data,
+                controller: textController,
                 decoration: InputDecoration(labelText: 'Enter a value'),
               ),
               SizedBox(height: 20),
@@ -30,7 +28,7 @@ class FirstPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SecondPage(
-                        passedValue: poll_data.text,
+                        passedValue: textController.text,
                       ),
                     ),
                   );
