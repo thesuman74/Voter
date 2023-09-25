@@ -1,34 +1,26 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:voter/view_data.dart';
-
 import 'dart:io';
-// Add this import for Size class
 import 'package:image_picker/image_picker.dart';
 
 class Myform extends StatefulWidget {
-  const Myform({super.key});
-  
+  final String? PollName;
+
+  Myform({this.PollName});
 
   @override
   State<Myform> createState() => _MyformState();
 }
 
 class _MyformState extends State<Myform> {
-  
-  
-  //for image
   File? imagepath;
   String? imagename;
   String? imagedata;
   ImagePicker imagePicker = ImagePicker();
-  final double maxWidth = 200.0; // Define maximum image width
-  final double maxHeight = 200.0; // Define maximum image height
-
-  //to use value from  textfield
+  final double maxWidth = 200.0;
+  final double maxHeight = 200.0;
 
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -53,14 +45,14 @@ class _MyformState extends State<Myform> {
           "data": imagedata,
           "image_name": imagename
         });
-//getting response from json
+
         var response = jsonDecode(res.body);
         if (response["success"] == "true") {
           print("record inserted successfully");
           name.text = "";
           email.text = "";
           password.text = "";
-          resetImage(); // Call resetImage to clear the image
+          resetImage();
           print("form cleared  successfully");
         } else {
           print("some issues while inserting ");
@@ -73,17 +65,13 @@ class _MyformState extends State<Myform> {
     }
   }
 
-  //function for image uploading
   Future<void> uploadimage() async {
     try {
       String uri = "http://10.0.2.2/practice_api/imageupload.php";
-      var res = await http.post(Uri.parse(uri), body: {
-        // "caption": caption.text,
-        "data": imagedata,
-        "name": imagename
-      });
+      var res = await http
+          .post(Uri.parse(uri), body: {"data": imagedata, "name": imagename});
 
-      print("Response: ${res.body}"); // Print the response for debugging
+      print("Response: ${res.body}");
 
       var response = jsonDecode(res.body);
 
@@ -93,12 +81,10 @@ class _MyformState extends State<Myform> {
         print("error while uploading");
       }
     } catch (e) {
-      // Handle network-related errors
       print("Network error: $e");
     }
   }
 
-  //function to get image
   Future<void> getImage() async {
     var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
 
@@ -122,6 +108,10 @@ class _MyformState extends State<Myform> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+                margin: const EdgeInsets.all(8),
+                child: Text('Received Data: ${widget.PollName}'),
+              ),
               Container(
                 margin: const EdgeInsets.all(8),
                 child: TextFormField(
@@ -164,8 +154,7 @@ class _MyformState extends State<Myform> {
                       ),
                       child: Image.file(
                         imagepath!,
-                        fit: BoxFit
-                            .contain, // Use BoxFit to fit the image within constraints
+                        fit: BoxFit.contain,
                       ),
                     )
                   : const Text('Image not chosen yet'),
@@ -178,7 +167,6 @@ class _MyformState extends State<Myform> {
                     child: ElevatedButton(
                       onPressed: () {
                         insertrecord();
-                        // uploadimage();
                       },
                       child: const Text("Insert"),
                     ),

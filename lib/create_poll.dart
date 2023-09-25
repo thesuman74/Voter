@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:voter/formpage.dart'; // Make sure this import is correct
+// Make sure this import is correct
 
 class PollPage extends StatefulWidget {
   @override
@@ -26,13 +26,13 @@ class _PollPageState extends State<PollPage> {
           // poll_name.text = "";
 
           // Navigate to the "Myform" page
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  Myform(), // Make sure Myform is a valid widget
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //         Myform(), // Make sure Myform is a valid widget
+          //   ),
+          // );
         } else {
           print("Some issues while inserting poll name");
         }
@@ -46,7 +46,7 @@ class _PollPageState extends State<PollPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Poll Page'),
+        title: const Text('Poll Page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

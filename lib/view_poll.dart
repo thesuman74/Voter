@@ -1,0 +1,66 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:voter/formpage.dart';
+import 'package:voter/update_record.dart';
+
+class view_poll_data extends StatefulWidget {
+  @override
+  State<view_poll_data> createState() => _view_poll_dataState();
+}
+
+class _view_poll_dataState extends State<view_poll_data> {
+  List polldata = [];
+
+  Future<void> getrecord() async {
+    String uri = "http://10.0.2.2/practice_api/view_poll.php";
+
+    try {
+      var response = await http.get(Uri.parse(uri));
+
+      setState(() {
+        polldata = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    } 
+  }
+
+  @override
+  void initState() {
+    getrecord();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("view poll data"),
+      ),
+      body: ListView.builder(
+        itemCount: polldata.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.all(8),
+            child: ListTile(
+              onTap: () {
+                String pollDataText = polldata[index]["poll_data"] ??
+                    "Default Value"; // Replace "Default Value" with an appropriate default value
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Myform(
+                      PollName: pollDataText,
+                    ),
+                  ),
+                );
+              },
+              leading: Text(polldata[index]["poll_data"]),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
