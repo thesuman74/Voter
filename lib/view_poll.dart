@@ -43,40 +43,27 @@ class _view_poll_dataState extends State<view_poll_data> {
             itemCount: polldata.length,
             itemBuilder: (context, index) {
               return Card(
-                  child: Column(
-                children: [
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Myform(
-                            passedValue: polldata[index]["poll_name"],
+                child: Column(
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Myform(
+                              passedValue: polldata[index]["poll_name"],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    title: Text(polldata[index]["poll_name"]),
-                  )
-                ],
-              ));
-            },
-          )),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Navigate to the second page and pass the value
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Myform(
-                    passedValue: textController.text,
-                  ),
+                        );
+                      },
+                      title: Text(polldata[index]["poll_name"]),
+                    )
+                  ],
                 ),
               );
             },
-            child: Text('Go to Second Page'),
-          ),
+          )),
+
           // Expanded(
           //   child: ListView.builder(
           //     itemCount: polldata.length,

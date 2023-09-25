@@ -15,6 +15,7 @@ class Myform extends StatefulWidget {
 }
 
 class _MyformState extends State<Myform> {
+  String? PollValue;
   File? imagepath;
   String? imagename;
   String? imagedata;
@@ -25,6 +26,12 @@ class _MyformState extends State<Myform> {
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    PollValue = widget.passedValue;
+  }
 
   void resetImage() {
     setState(() {
@@ -43,7 +50,8 @@ class _MyformState extends State<Myform> {
           "email": email.text,
           "password": password.text,
           "data": imagedata,
-          "image_name": imagename
+          "image_name": imagename,
+          "PollValue": PollValue
         });
 
         var response = jsonDecode(res.body);
@@ -110,7 +118,7 @@ class _MyformState extends State<Myform> {
             children: [
               Container(
                 margin: const EdgeInsets.all(8),
-                child: Text('Received Data: ${widget.passedValue}'),
+                child: Text('Received Data:$PollValue'),
               ),
               Container(
                 margin: const EdgeInsets.all(8),
