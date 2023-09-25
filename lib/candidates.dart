@@ -35,7 +35,7 @@ class _CandidatesState extends State<Candidates> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: 0.65,
+                    childAspectRatio: 1.0,
                   ),
                   itemCount: data.length,
                   itemBuilder: (context, index) {

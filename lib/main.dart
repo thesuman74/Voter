@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voter/create_poll.dart';
 import 'package:voter/formpage.dart';
 import 'package:voter/home.dart';
 import 'package:voter/login.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.orangeAccent,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
+      initialRoute: 'poll',
       routes: {
         'form': (context) => const Myform(),
         'login': (context) => const MyLogin(),
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         'home': (contex) => const MyCustomWidget(),
         'candidates': (context) => const Candidates(),
         'success': (context) => const SuccessPage(),
+        'poll': (context) => PollPage(),
       },
     );
   }
