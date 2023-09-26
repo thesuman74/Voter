@@ -14,7 +14,7 @@ class _SuccessPageState extends State<SuccessPage> {
   void initState() {
     super.initState();
     // Trigger the fade animation after a delay of 2 seconds.
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _showTick = true;
       });
@@ -25,7 +25,7 @@ class _SuccessPageState extends State<SuccessPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Success Page"),
+          title: const Text("Success Page"),
         ),
         body: Column(
           children: [
@@ -52,7 +52,7 @@ class _SuccessPageState extends State<SuccessPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 250, // Set the width of the Card
                     height: 400, // Set the height of the Card
                     child: Card(
@@ -62,7 +62,7 @@ class _SuccessPageState extends State<SuccessPage> {
                             BorderRadius.circular(10.0), // Card's border radius
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(1),
+                        padding: const EdgeInsets.all(1),
                         child: Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
@@ -77,7 +77,7 @@ class _SuccessPageState extends State<SuccessPage> {
                               ),
                             ),
                             AnimatedOpacity(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               opacity: _showTick ? 1.0 : 0.0,
                               child: Image.asset(
                                 'assets/tick.png',
