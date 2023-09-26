@@ -63,32 +63,6 @@ class _view_poll_dataState extends State<view_poll_data> {
               );
             },
           )),
-
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: polldata.length,
-          //     itemBuilder: (context, index) {
-          //       return Card(
-          //         margin: const EdgeInsets.all(8),
-          //         child: ListTile(
-          //             // onTap: () {
-          //             //   String pollDataText = polldata[index]["poll_data"] ??
-          //             //       "Default Value"; // Replace "Default Value" with an appropriate default value
-          //             //   Navigator.push(
-          //             //     context,
-          //             //     MaterialPageRoute(
-          //             //       builder: (context) => Myform(
-          //             //         PollName: pollDataText,
-          //             //       ),
-          //             //     ),
-          //             //   );
-          //             // },
-          //             // leading: Text(polldata[index]["poll_data"]),
-          //             ),
-          //       );
-          //     },
-          //   ),
-          // ),
         ],
       ),
     );

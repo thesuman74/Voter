@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 07:07 AM
+-- Generation Time: Sep 26, 2023 at 08:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,11 +39,7 @@ CREATE TABLE `poll_name` (
 INSERT INTO `poll_name` (`id`, `poll_name`) VALUES
 (1, 'suman'),
 (2, 'ashish'),
-(3, 'sadhikari'),
-(4, 'sadhikari'),
-(5, 'gces voting'),
-(6, 'suman'),
-(7, 'suman');
+(5, 'gces voting');
 
 -- --------------------------------------------------------
 
@@ -68,7 +64,9 @@ INSERT INTO `user_table` (`id`, `uname`, `uemail`, `upassword`, `poll_name`, `im
 (55, 'suman adhikari', 'adhikari', 'ceo ', 'gces', 'upload/Outdoors-man-portrait_(cropped).jpg'),
 (56, 'ashish', 'paudel ', 'ashsh', 'gces', 'upload/Outdoors-man-portrait_(cropped).jpg'),
 (57, 'akash', 'akash', 'akash', 'ashish', 'upload/Outdoors-man-portrait_(cropped).jpg'),
-(58, 'gces', 'gecs', 'gces', 'gces voting', 'upload/Outdoors-man-portrait_(cropped).jpg');
+(58, 'gces', 'gecs', 'gces', 'gces voting', 'upload/Outdoors-man-portrait_(cropped).jpg'),
+(59, 'ashish paudel ', 'ashish@gmail.com', 'sdfhalsdh', 'gces voting', 'upload/Outdoors-man-portrait_(cropped).jpg'),
+(60, 'ashish acharya ', 'sdalflasj', 'dlkfjlsdjf', 'gces voting', 'upload/Outdoors-man-portrait_(cropped).jpg');
 
 --
 -- Indexes for dumped tables
@@ -100,7 +98,7 @@ ALTER TABLE `poll_name`
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

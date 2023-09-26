@@ -39,7 +39,7 @@ class _MyVoterState extends State<MyVoter> {
                   child: Column(children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'candidates');
+                          Navigator.pushNamed(context, 'home');
                           null;
                         },
                         child: const Text(
