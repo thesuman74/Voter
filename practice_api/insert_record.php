@@ -3,6 +3,7 @@
 include("dbconnection.php");
 $con = dbconnection();
 
+// Form data
 if (isset($_POST["name"])) {
     $name = $_POST["name"];
 } else {
@@ -24,7 +25,14 @@ if (isset($_POST["password"])) {
     return;
 }
 
-// image data
+if (isset($_POST["PollValue"])) {
+    $PollValue = $_POST["PollValue"];
+} else {
+    echo json_encode(["success" => "false", "message" => "Poll name not provided"]);
+    return;
+}
+
+// Image data
 if (isset($_POST["data"])) {
     $data = $_POST["data"];
 } else {
@@ -41,8 +49,8 @@ if (isset($_POST["image_name"])) {
 
 $path = "upload/$image_name";
 
-$query = "INSERT INTO `user_table`(`uname`, `uemail`, `upassword`, `image_path`)
- VALUES ('$name', '$email' ,'$password', '$path')";
+$query = "INSERT INTO `user_table`(`uname`, `uemail`, `upassword`, `poll_name`, `image_path`)
+ VALUES ('$name', '$email' ,'$password','$PollValue', '$path')";
 file_put_contents($path, base64_decode($data));
 
 $exe = mysqli_query($con, $query);
