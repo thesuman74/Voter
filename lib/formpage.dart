@@ -118,7 +118,13 @@ class _MyformState extends State<Myform> {
             children: [
               Container(
                 margin: const EdgeInsets.all(8),
-                child: Text('Received Data:$PollValue'),
+                child: Text(
+                  '$PollValue',
+                  style: const TextStyle(
+                      fontSize: 27,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               Container(
                 margin: const EdgeInsets.all(8),

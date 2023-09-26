@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 09:56 AM
+-- Generation Time: Sep 26, 2023 at 07:07 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -24,21 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_image`
+-- Table structure for table `poll_name`
 --
 
-CREATE TABLE `table_image` (
+CREATE TABLE `poll_name` (
   `id` int(255) NOT NULL,
-  `caption` varchar(255) NOT NULL,
-  `image-path` varchar(255) NOT NULL
+  `poll_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `table_image`
+-- Dumping data for table `poll_name`
 --
 
-INSERT INTO `table_image` (`id`, `caption`, `image-path`) VALUES
-(1, 'heading ', 'upload/Outdoors-man-portrait_(cropped).jpg');
+INSERT INTO `poll_name` (`id`, `poll_name`) VALUES
+(1, 'suman'),
+(2, 'ashish'),
+(3, 'sadhikari'),
+(4, 'sadhikari'),
+(5, 'gces voting'),
+(6, 'suman'),
+(7, 'suman');
 
 -- --------------------------------------------------------
 
@@ -51,6 +56,7 @@ CREATE TABLE `user_table` (
   `uname` varchar(40) NOT NULL,
   `uemail` varchar(40) NOT NULL,
   `upassword` varchar(40) NOT NULL,
+  `poll_name` varchar(255) NOT NULL,
   `image_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,19 +64,20 @@ CREATE TABLE `user_table` (
 -- Dumping data for table `user_table`
 --
 
-INSERT INTO `user_table` (`id`, `uname`, `uemail`, `upassword`, `image_path`) VALUES
-(53, 'paudel', 'adhikari', 'akdfj', 'upload/Outdoors-man-portrait_(cropped).jpg'),
-(54, 'ashish', 'paudel', 'paudel 1', 'upload/Outdoors-man-portrait_(cropped).jpg'),
-(55, 'suman', 'adhikar', 'ceo ', 'upload/Outdoors-man-portrait_(cropped).jpg');
+INSERT INTO `user_table` (`id`, `uname`, `uemail`, `upassword`, `poll_name`, `image_path`) VALUES
+(55, 'suman adhikari', 'adhikari', 'ceo ', 'gces', 'upload/Outdoors-man-portrait_(cropped).jpg'),
+(56, 'ashish', 'paudel ', 'ashsh', 'gces', 'upload/Outdoors-man-portrait_(cropped).jpg'),
+(57, 'akash', 'akash', 'akash', 'ashish', 'upload/Outdoors-man-portrait_(cropped).jpg'),
+(58, 'gces', 'gecs', 'gces', 'gces voting', 'upload/Outdoors-man-portrait_(cropped).jpg');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `table_image`
+-- Indexes for table `poll_name`
 --
-ALTER TABLE `table_image`
+ALTER TABLE `poll_name`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -84,16 +91,16 @@ ALTER TABLE `user_table`
 --
 
 --
--- AUTO_INCREMENT for table `table_image`
+-- AUTO_INCREMENT for table `poll_name`
 --
-ALTER TABLE `table_image`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `poll_name`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

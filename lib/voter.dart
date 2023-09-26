@@ -51,15 +51,15 @@ class _MyVoterState extends State<MyVoter> {
                         )),
                     const SizedBox(
                       height: 150,
-                    ),
+                    ),  
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'login');
+                          Navigator.pushNamed(context, 'poll');
                         },
                         child: const Text(
                           'Admin Click Here',
                           style: TextStyle(
-                            decoration: TextDecoration.underline,
+                            decoration: TextDecoration.none,
                             fontSize: 18,
                             color: Color(0xff4c505b),
                           ),

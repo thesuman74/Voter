@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.orangeAccent,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'poll',
+      initialRoute: 'login',
       routes: {
         'form': (context) => Myform(),
         'login': (context) => const MyLogin(),
