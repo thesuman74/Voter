@@ -11,7 +11,6 @@ class view_poll_data extends StatefulWidget {
 
 class _view_poll_dataState extends State<view_poll_data> {
   List polldata = [];
-  final TextEditingController textController = TextEditingController();
   bool isLoading = true; // Track whether data is loading
 
   Future<void> getrecord() async {
