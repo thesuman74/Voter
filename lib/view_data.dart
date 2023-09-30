@@ -84,7 +84,8 @@ class _view_dataState extends State<view_data> {
                 );
               },
               leading: Image.network(
-                'http://10.0.2.2/practice_api/' + userdata[index]["image_path"],
+                'http://192.168.1.70/practice_api/' +
+                    userdata[index]["image_path"],
                 width: 100, // Set the width as needed
                 height: 100, // Set the height as needed
                 fit: BoxFit

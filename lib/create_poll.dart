@@ -16,7 +16,7 @@ class _PollPageState extends State<PollPage> {
   Future<void> insertrecord() async {
     if (poll_name.text != "") {
       try {
-        String uri = "http://10.0.2.2/practice_api/insert_poll.php";
+        String uri = "http://192.168.1.70/practice_api//insert_poll.php";
         var res = await http.post(Uri.parse(uri), body: {
           "poll_name": poll_name.text,
         });

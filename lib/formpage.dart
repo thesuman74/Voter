@@ -75,7 +75,7 @@ class _MyformState extends State<Myform> {
 
   Future<void> uploadimage() async {
     try {
-      String uri = "http://10.0.2.2/practice_api/imageupload.php";
+      String uri = "http://192.168.1.70/practice_api/imageupload.php";
       var res = await http
           .post(Uri.parse(uri), body: {"data": imagedata, "name": imagename});
 
