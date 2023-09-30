@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+import 'formpage.dart';
 // Make sure this import is correct
 
 class PollPage extends StatefulWidget {
@@ -23,16 +25,16 @@ class _PollPageState extends State<PollPage> {
         var response = jsonDecode(res.body);
         if (response["success"] == "true") {
           print("record inserted successfully");
-          // poll_name.text = "";
+          poll_name.text = "";
 
           // Navigate to the "Myform" page
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //         Myform(), // Make sure Myform is a valid widget
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  Myform(), // Make sure Myform is a valid widget
+            ),
+          );
         } else {
           print("Some issues while inserting poll name");
         }

@@ -12,22 +12,27 @@ class view_poll_data extends StatefulWidget {
 class _view_poll_dataState extends State<view_poll_data> {
   List polldata = [];
   final TextEditingController textController = TextEditingController();
+  bool isLoading = true; // Track whether data is loading
 
   Future<void> getrecord() async {
     String uri = "http://10.0.2.2/practice_api/view_poll.php";
     try {
       var response = await http.get(Uri.parse(uri));
 
-      polldata = jsonDecode(response.body);
+      setState(() {
+        polldata = jsonDecode(response.body);
+        isLoading = false; // Data loading complete
+      });
     } catch (e) {
       print(e);
+      isLoading = false; // Data loading failed
     }
   }
 
   @override
   void initState() {
-    getrecord();
     super.initState();
+    getrecord(); // Fetch data when the widget is created
   }
 
   @override
@@ -38,31 +43,37 @@ class _view_poll_dataState extends State<view_poll_data> {
       ),
       body: Column(
         children: [
-          Expanded(
+          if (isLoading)
+            Center(
+                child:
+                    CircularProgressIndicator()), // Display loading indicator
+          if (!isLoading)
+            Expanded(
               child: ListView.builder(
-            itemCount: polldata.length,
-            itemBuilder: (context, index) {
-              return Card(
-                child: Column(
-                  children: [
-                    ListTile(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Myform(
-                              passedValue: polldata[index]["poll_name"],
-                            ),
-                          ),
-                        );
-                      },
-                      title: Text(polldata[index]["poll_name"]),
-                    )
-                  ],
-                ),
-              );
-            },
-          )),
+                itemCount: polldata.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Column(
+                      children: [
+                        ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Myform(
+                                  passedValue: polldata[index]["poll_name"],
+                                ),
+                              ),
+                            );
+                          },
+                          title: Text(polldata[index]["poll_name"]),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );

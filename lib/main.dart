@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
         'voter': (contex) => const MyVoter(),
         'register': (contex) => const MyRegister(),
         'home': (contex) => const MyCustomWidget(),
-        'candidates': (context) => const Candidates(),
+        'candidates': (context) => Candidates(),
         'success': (context) => const SuccessPage(),
         'poll': (context) => view_poll_data(),
-        'FirstPage': (context) => FirstPage(),
+        'createpoll': (context) => PollPage(),
       },
     );
   }

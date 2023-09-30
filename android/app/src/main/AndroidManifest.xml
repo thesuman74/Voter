@@ -2,6 +2,8 @@
     package="com.example.voter">
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
    <application
         android:label="voter"

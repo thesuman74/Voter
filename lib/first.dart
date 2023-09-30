@@ -8,7 +8,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Page'),
+        title: const Text('First Page'),
       ),
       body: Center(
         child: Padding(
@@ -18,9 +18,9 @@ class FirstPage extends StatelessWidget {
             children: [
               TextField(
                 controller: textController,
-                decoration: InputDecoration(labelText: 'Enter a value'),
+                decoration: const InputDecoration(labelText: 'Enter a value'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Navigate to the second page and pass the value
@@ -33,7 +33,7 @@ class FirstPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Go to test Page'),
+                child: const Text('Go to test Page'),
               ),
             ],
           ),
