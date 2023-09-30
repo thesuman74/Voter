@@ -44,7 +44,7 @@ class _MyformState extends State<Myform> {
   Future<void> insertrecord() async {
     if (name.text != "" || email.text != "" || password.text != "") {
       try {
-        String uri = "http://10.0.2.2/practice_api/insert_record.php";
+        String uri = "http://192.168.1.70/practice_api/insert_record.php";
         var res = await http.post(Uri.parse(uri), body: {
           "name": name.text,
           "email": email.text,

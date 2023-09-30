@@ -54,7 +54,7 @@ class _MyVoterState extends State<MyVoter> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'form');
+                          Navigator.pushNamed(context, 'poll');
                         },
                         child: const Text(
                           'Admin Click Here',
