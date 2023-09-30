@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'data.dart'; // Assuming you have a file named 'data.dart' with your data
 
 class Candidates extends StatefulWidget {
-  const Candidates({Key? key});
+  final String? passedValue;
+  final String? result;
+
+  Candidates({this.passedValue, this.result});
 
   @override
   State<Candidates> createState() => _CandidatesState();
@@ -11,20 +14,34 @@ class Candidates extends StatefulWidget {
 class _CandidatesState extends State<Candidates> {
   @override
   Widget build(BuildContext context) {
+    // Check if passedValue is not null and not empty before splitting it
+    List<String> qrCodeArray = (widget.result ?? '').split(',');
+    String? polldata = widget.passedValue;
+    String name = qrCodeArray.isNotEmpty ? qrCodeArray[0] : '';
+    // String age = qrCodeArray[1];
+    // String validity = qrCodeArray[2];
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 105, top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Welcome Ashish ',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
-                  ),
-                ],
+              padding: const EdgeInsets.only(top: 50),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Welcome $name",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
+                    ),
+                    Text(
+                      "at $polldata",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(

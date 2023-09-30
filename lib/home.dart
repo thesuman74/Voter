@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:voter/user_poll.dart';
 
 class MyCustomWidget extends StatefulWidget {
   const MyCustomWidget({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NextScreen(result: result),
+                        builder: (context) => user_poll_data(result: result),
                       ),
                     );
                   }
@@ -100,58 +101,5 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
 
       return null;
     }
-  }
-}
-
-class NextScreen extends StatelessWidget {
-  final String result;
-
-  const NextScreen({Key? key, required this.result}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    List<String> qrCodeArray = result.split(',');
-    String name = qrCodeArray[0];
-    String age = qrCodeArray[1];
-    String validity = qrCodeArray[2];
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Next Screen'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  "Welcome $name",
-                  style: const TextStyle(
-                      fontSize: 27,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Center(
-                child: Text(
-                  "Please read the details carefully.",
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black45,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Text(
-                    "Your QR code details are \n Name = $name \n Age = $age \n validity = $validity"),
-              ),
-            ],
-          ),
-        ));
   }
 }
