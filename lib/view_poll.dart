@@ -41,40 +41,43 @@ class _view_poll_dataState extends State<view_poll_data> {
       appBar: AppBar(
         title: const Text("view poll data"),
       ),
-      body: Column(
-        children: [
-          if (isLoading)
-            Center(
-                child:
-                    CircularProgressIndicator()), // Display loading indicator
-          if (!isLoading)
-            Expanded(
-              child: ListView.builder(
-                itemCount: polldata.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Myform(
-                                  passedValue: polldata[index]["poll_name"],
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            if (isLoading)
+              const Center(
+                  child:
+                      CircularProgressIndicator()), // Display loading indicator
+            if (!isLoading)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: polldata.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Myform(
+                                    passedValue: polldata[index]["poll_name"],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          title: Text(polldata[index]["poll_name"]),
-                        )
-                      ],
-                    ),
-                  );
-                },
+                              );
+                            },
+                            title: Text(polldata[index]["poll_name"]),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

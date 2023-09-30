@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:voter/create_poll.dart';
-import 'package:voter/first.dart';
 import 'package:voter/formpage.dart';
 import 'package:voter/home.dart';
 import 'package:voter/login.dart';
