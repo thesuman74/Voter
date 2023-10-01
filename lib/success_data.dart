@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SuccessPage extends StatefulWidget {
-  const SuccessPage({Key? key});
+  final String? imageValue;
+  final String? candidateName;
+
+  SuccessPage({this.imageValue, this.candidateName, Key? key})
+      : super(key: key);
 
   @override
   _SuccessPageState createState() => _SuccessPageState();
@@ -18,102 +22,111 @@ class _SuccessPageState extends State<SuccessPage> {
       setState(() {
         _showTick = true;
       });
+      // Auto-navigate to the next page after 5 seconds
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.popAndPushNamed(context, 'userpofll');
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Success Page"),
-        ),
-        body: Column(
-          children: [
-            const Center(
-              child: Text(
-                "Successful",
-                style: TextStyle(
-                    fontSize: 27,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+      appBar: AppBar(
+        title: const Text("Success Page"),
+      ),
+      body: Column(
+        children: [
+          const Center(
+            child: Text(
+              "Successful",
+              style: TextStyle(
+                fontSize: 27,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Center(
-              child: Text(
-                "Voting is not only our right, it is our power.",
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black45,
-                    fontWeight: FontWeight.bold),
+          ),
+          const Center(
+            child: Text(
+              "Voting is not only our right, it is our power.",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.black45,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 250, // Set the width of the Card
-                    height: 400, // Set the height of the Card
-                    child: Card(
-                      elevation: 20,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(10.0), // Card's border radius
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(1),
-                        child: Stack(
-                          alignment: Alignment.bottomLeft,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  16.0), // Image's border radius
-                              child: Image.asset(
-                                'assets/candidate.jpg',
-                                width: 350,
-                                height: 400,
-                                fit: BoxFit.fill, // Fill the entire container
-                              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 250, // Set the width of the Card
+                  height: 350, // Set the height of the Card
+                  child: Card(
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Card's border radius
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1),
+                      child: Stack(
+                        alignment: Alignment.bottomLeft,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                16.0), // Image's border radius
+                            child: Image.network(
+                              widget.imageValue ??
+                                  'assets/candidate.jpg', // Use widget.imageValue here
+                              width: 350,
+                              height: 350,
+                              fit: BoxFit.fill, // Fill the entire container
                             ),
-                            AnimatedOpacity(
-                              duration: const Duration(seconds: 1),
-                              opacity: _showTick ? 1.0 : 0.0,
-                              child: Image.asset(
-                                'assets/tick.png',
-                                width: 180,
-                                height: 150,
-                                fit: BoxFit.cover,
-                              ),
+                          ),
+                          AnimatedOpacity(
+                            duration: const Duration(seconds: 1),
+                            opacity: _showTick ? 1.0 : 0.0,
+                            child: Image.asset(
+                              'assets/tick.png',
+                              width: 180,
+                              height: 150,
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Text(
+              widget.candidateName ?? "", // Use widget.candidateName here
+              style: TextStyle(
+                fontSize: 27,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Center(
-              child: Text(
-                "Ram",
-                style: TextStyle(
-                    fontSize: 27,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
+          ),
+          FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.pushNamed(context, 'voter');
+            },
+            label: const Text(
+              'Thanks for voting',
+              style: TextStyle(fontSize: 20),
             ),
-            FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.pushNamed(context, 'voter');
-              },
-              label: const Text(
-                'Thanks for voting',
-                style: TextStyle(fontSize: 20),
-              ),
-              backgroundColor: Colors.orange,
-            ),
-          ],
-        ));
+            backgroundColor: Colors.orange,
+          ),
+        ],
+      ),
+    );
   }
 }

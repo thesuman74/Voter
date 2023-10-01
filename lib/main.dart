@@ -7,6 +7,7 @@ import 'package:voter/register.dart';
 import 'package:voter/success_data.dart';
 import 'package:voter/view_poll.dart';
 import 'package:voter/voter.dart';
+import 'package:voter/user_poll.dart';
 import 'candidates.dart';
 import 'counter.dart';
 
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
         'register': (contex) => const MyRegister(),
         'home': (contex) => const MyCustomWidget(),
         'candidates': (context) => Candidates(),
-        'success': (context) => const SuccessPage(),
-        'poll': (context) => view_poll_data(),
+        'success': (context) => SuccessPage(),
+        'adminpoll': (context) => view_poll_data(),
         'createpoll': (context) => PollPage(),
+        'userpoll': (context) => user_poll_data(),
       },
     );
   }
