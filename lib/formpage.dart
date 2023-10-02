@@ -5,6 +5,8 @@ import 'package:voter/view_data.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
+import 'counter.dart';
+
 class Myform extends StatefulWidget {
   final String? passedValue;
 
@@ -195,6 +197,18 @@ class _MyformState extends State<Myform> {
                                 builder: (context) => const view_data()));
                       },
                       child: const Text("view data"),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyCounter()));
+                      },
+                      child: const Text("counter"),
                     ),
                   )
                 ],

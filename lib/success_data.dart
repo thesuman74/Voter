@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 
 class SuccessPage extends StatefulWidget {
@@ -12,11 +15,13 @@ class SuccessPage extends StatefulWidget {
 }
 
 class _SuccessPageState extends State<SuccessPage> {
+  String? name;
   bool _showTick = false;
 
   @override
   void initState() {
     super.initState();
+    name = widget.candidateName;
     // Trigger the fade animation after a delay of 2 seconds.
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
@@ -24,9 +29,32 @@ class _SuccessPageState extends State<SuccessPage> {
       });
       // Auto-navigate to the next page after 5 seconds
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.pushNamed(context, 'userposll');
+        Navigator.pushNamed(context, 'home');
       });
     });
+  }
+
+  Future<void> insertrecord() async {
+    if (name != "") {
+      print(name);
+      try {
+        String uri = "http://192.168.1.70/practice_api/insert_vote.php";
+        var res = await http.post(Uri.parse(uri), body: {
+          "name": name,
+        });
+
+        var response = jsonDecode(res.body);
+        if (response["success"] == "true") {
+          print("record inserted successfully");
+        } else {
+          print("some issues while inserting ");
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      print("Please fill all fields");
+    }
   }
 
   @override
@@ -117,7 +145,8 @@ class _SuccessPageState extends State<SuccessPage> {
           ),
           FloatingActionButton.extended(
             onPressed: () {
-              Navigator.pushNamed(context, 'voter');
+              insertrecord();
+              // Navigator.pushNamed(context, 'voter');
             },
             label: const Text(
               'Thanks for voting',
