@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:voter/formpage.dart';
 import 'package:voter/update_record.dart';
 
+import 'create_poll.dart';
+
 class view_poll_data extends StatefulWidget {
   @override
   State<view_poll_data> createState() => _view_poll_dataState();
@@ -77,6 +79,18 @@ class _view_poll_dataState extends State<view_poll_data> {
               ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  PollPage(), // Replace with the actual name of your "createpoll" page
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

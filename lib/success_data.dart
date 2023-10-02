@@ -24,7 +24,7 @@ class _SuccessPageState extends State<SuccessPage> {
       });
       // Auto-navigate to the next page after 5 seconds
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.popAndPushNamed(context, 'userpofll');
+        Navigator.pushNamed(context, 'userposll');
       });
     });
   }

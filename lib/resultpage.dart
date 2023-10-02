@@ -11,7 +11,7 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result Page'),
+        title: const Text('Result Page'),
       ),
       body: Center(
         child: Text('Response: $response'),
