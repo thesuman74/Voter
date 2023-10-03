@@ -53,17 +53,18 @@ class _MyVoterState extends State<MyVoter> {
                       height: 150,
                     ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'adminpoll');
-                        },
-                        child: const Text(
-                          'Admin Click Here',
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: 18,
-                            color: Color(0xff4c505b),
-                          ),
-                        ))
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'login');
+                      },
+                      child: const Text(
+                        'Admin Click Here',
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          color: Color(0xff4c505b),
+                        ),
+                      ),
+                    ),
                   ]),
                 ),
               ),

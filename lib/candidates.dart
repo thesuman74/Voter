@@ -18,7 +18,7 @@ class _CandidatesState extends State<Candidates> {
   Future<void> getrecord(String? passedValue) async {
     // Check if passedValue is not null or empty before making the request
     if (passedValue != null && passedValue.isNotEmpty) {
-      String uri = "http://192.168.1.70/practice_api/user_poll.php";
+      String uri = "http://192.168.1.65/practice_api/user_poll.php";
       try {
         var res = await http.post(Uri.parse(uri), body: {
           "passedValue": passedValue,
@@ -80,14 +80,14 @@ class _CandidatesState extends State<Candidates> {
                                 MaterialPageRoute(
                                   builder: (context) => SuccessPage(
                                     imageValue:
-                                        'http://192.168.1.70/practice_api/${user["image_path"]}',
+                                        'http://192.168.1.65/practice_api/${user["image_path"]}',
                                     candidateName: '${user["uname"]}',
                                   ),
                                 ),
                               );
                             },
                             child: Image.network(
-                              'http://192.168.1.70/practice_api/${user["image_path"]}',
+                              'http://192.168.1.65/practice_api/${user["image_path"]}',
                               width: 150,
                               height: 200,
                               fit: BoxFit.fill,

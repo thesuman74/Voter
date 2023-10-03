@@ -8,6 +8,9 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<MyLogin> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,6 +37,7 @@ class _MyLoginState extends State<MyLogin> {
                   child: Column(
                     children: [
                       TextField(
+                        controller: email,
                         decoration: InputDecoration(
                             fillColor: Colors.grey.shade100,
                             filled: true,
@@ -45,6 +49,7 @@ class _MyLoginState extends State<MyLogin> {
                         height: 30,
                       ),
                       TextField(
+                        controller: password,
                         obscureText: true,
                         decoration: InputDecoration(
                             fillColor: Colors.grey.shade100,

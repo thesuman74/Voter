@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:voter/formpage.dart';
-import 'package:voter/update_record.dart';
 
 import 'create_poll.dart';
 
@@ -16,7 +15,7 @@ class _view_poll_dataState extends State<view_poll_data> {
   bool isLoading = true; // Track whether data is loading
 
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.70/practice_api/view_poll.php";
+    String uri = "http://192.168.1.65/practice_api/view_poll.php";
     try {
       var response = await http.get(Uri.parse(uri));
 
