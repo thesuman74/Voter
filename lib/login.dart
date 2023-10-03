@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MyLogin extends StatefulWidget {
@@ -10,6 +13,56 @@ class MyLogin extends StatefulWidget {
 class _MyLoginState extends State<MyLogin> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  List admindata = [];
+  bool isLoading = true; // Track whether data is loading
+  final TextEditingController textController = TextEditingController();
+
+  int index = 0;
+  Future<void> getrecord() async {
+    String uri = "http://192.168.1.65/practice_api/login.php";
+    try {
+      var response = await http.get(Uri.parse(uri));
+      admindata = jsonDecode(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getrecord(); // Fetch data when the widget is created
+  }
+
+  void loginRecord()
+  // {
+  //   // ignore: unrelated_type_equality_checks
+  //   if (email.text == "admin" && password.text == "123") {
+  //     Navigator.pushNamed(context, 'userpoll');
+  //   } else {
+  //     // Show an error message using a SnackBar
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Wrong email and/or password'),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  {
+    if (index < admindata.length) {
+      if (admindata[index]["email"] == email.text &&
+          admindata[index]["password"] == password.text) {
+        Navigator.pushNamed(context, 'userpoll');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Wrong email and/or password'),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +128,7 @@ class _MyLoginState extends State<MyLogin> {
                             child: IconButton(
                               color: Colors.white,
                               onPressed: () {
-                                Navigator.pushNamed(context, 'candidates');
+                                loginRecord();
                               },
                               icon: const Icon(Icons.arrow_forward),
                             ),

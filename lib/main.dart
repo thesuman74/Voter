@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         'register': (contex) => const MyRegister(),
         'home': (contex) => const MyCustomWidget(),
         'candidates': (context) => Candidates(),
-        'success': (context) => SuccessPage(),
+        'success': (context) => const SuccessPage(),
         'adminpoll': (context) => view_poll_data(),
         'createpoll': (context) => PollPage(),
         'userpoll': (context) => user_poll_data(),

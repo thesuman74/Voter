@@ -31,6 +31,7 @@ class _update_recordState extends State<update_record> {
       var response = jsonDecode(res.body);
       if (response["success"] == "true") {
         print("update successfully");
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
