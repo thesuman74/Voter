@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 class SuccessPage extends StatefulWidget {
   final String? imageValue;
   final String? candidateName;
+  final String? voter;
 
-  SuccessPage({this.imageValue, this.candidateName, Key? key})
+  SuccessPage({this.imageValue, this.voter, this.candidateName, Key? key})
       : super(key: key);
 
   @override
@@ -35,12 +36,14 @@ class _SuccessPageState extends State<SuccessPage> {
   }
 
   Future<void> insertrecord() async {
-    if (name != "") {
+    if (name != "" && widget.voter != "") {
       print(name);
+      print(widget.voter);
       try {
         String uri = "http://192.168.1.65/practice_api/insert_vote.php";
         var res = await http.post(Uri.parse(uri), body: {
           "name": name,
+          "voter": widget.voter,
         });
 
         var response = jsonDecode(res.body);
@@ -65,9 +68,9 @@ class _SuccessPageState extends State<SuccessPage> {
       ),
       body: Column(
         children: [
-          const Center(
+          Center(
             child: Text(
-              "Successful",
+              widget.voter ?? "", // Display the 'voter' value here
               style: TextStyle(
                 fontSize: 27,
                 color: Colors.black,

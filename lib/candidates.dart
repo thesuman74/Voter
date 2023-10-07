@@ -96,6 +96,7 @@ class _CandidatesState extends State<Candidates> {
                                           imageValue:
                                               'http://192.168.1.65/practice_api/${user["image_path"]}',
                                           candidateName: '${user["uname"]}',
+                                          voter: widget.result ?? "",
                                         ),
                                       ),
                                     );
