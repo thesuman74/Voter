@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -103,8 +105,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              user_poll_data(result: result),
+                          builder: (context) => user_poll_data(result: result),
                         ),
                       );
                     }
