@@ -38,7 +38,7 @@ class _SuccessPageState extends State<SuccessPage> {
     if (name != "") {
       print(name);
       try {
-        String uri = "http://192.168.1.65/practice_api/insert_vote.php";
+        String uri = "http://192.168.1.69/practice_api/insert_vote.php";
         var res = await http.post(Uri.parse(uri), body: {
           "name": name,
         });

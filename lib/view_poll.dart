@@ -15,7 +15,7 @@ class _view_poll_dataState extends State<view_poll_data> {
   bool isLoading = true; // Track whether data is loading
 
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.65/practice_api/view_poll.php";
+    String uri = "http://192.168.1.69/practice_api/view_poll.php";
     try {
       var response = await http.get(Uri.parse(uri));
 

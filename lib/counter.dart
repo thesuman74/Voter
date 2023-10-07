@@ -14,7 +14,7 @@ class _MyCounterState extends State<MyCounter> {
   List userdata = [];
 
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.65/practice_api/counter.php";
+    String uri = "http://192.168.1.69/practice_api/counter.php";
 
     try {
       var response = await http.get(Uri.parse(uri));

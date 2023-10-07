@@ -19,7 +19,7 @@ class _MyLoginState extends State<MyLogin> {
 
   int index = 0;
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.65/practice_api/login.php";
+    String uri = "http://192.168.1.69/practice_api/login.php";
     try {
       var response = await http.get(Uri.parse(uri));
       admindata = jsonDecode(response.body);

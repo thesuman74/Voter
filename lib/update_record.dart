@@ -22,7 +22,7 @@ class _update_recordState extends State<update_record> {
 
   Future<void> updaterecord() async {
     try {
-      String uri = "http://192.168.1.65/practice_api/update_data.php";
+      String uri = "http://192.168.1.69/practice_api/update_data.php";
       var res = await http.post(Uri.parse(uri), body: {
         "name": name.text,
         "email": email.text,

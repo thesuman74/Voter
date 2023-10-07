@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:voter/success_data.dart';
@@ -18,7 +19,7 @@ class _CandidatesState extends State<Candidates> {
   Future<void> getrecord(String? passedValue) async {
     // Check if passedValue is not null or empty before making the request
     if (passedValue != null && passedValue.isNotEmpty) {
-      String uri = "http://192.168.1.65/practice_api/user_poll.php";
+      String uri = "http://192.168.1.69/practice_api/user_poll.php";
       try {
         var res = await http.post(Uri.parse(uri), body: {
           "passedValue": passedValue,
@@ -41,6 +42,36 @@ class _CandidatesState extends State<Candidates> {
     // Call getrecord with the passedValue from the widget
     getrecord(widget.passedValue);
   }
+
+  // Future<void> authenticateWithBiometrics() async {
+  //   final localAuth = LocalAuthentication();
+
+  //   try {
+  //     final isAvailable = await localAuth.canCheckBiometrics;
+
+  //     if (isAvailable) {
+  //       final isAuthenticated = await localAuth.authenticate(
+  //         localizedReason:
+  //             'Authenticate using biometrics', // Displayed on the authentication dialog
+  //         // useErrorDialogs: true,
+  //       );
+
+  //       if (isAuthenticated) {
+  //         // Authentication successful, perform the desired action
+  //         print('Authentication successful');
+  //       } else {
+  //         // Authentication failed or canceled
+  //         print('Authentication failed or canceled');
+  //       }
+  //     } else {
+  //       // Biometric authentication is not available on this device
+  //       print('Biometric authentication is not available on this device');
+  //     }
+  //   } catch (e) {
+  //     // Handle errors
+  //     print('Error: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +106,20 @@ class _CandidatesState extends State<Candidates> {
                         children: [
                           GestureDetector(
                             onTap: () {
+                              // authenticateWithBiometrics();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SuccessPage(
                                     imageValue:
-                                        'http://192.168.1.65/practice_api/${user["image_path"]}',
+                                        'http://192.168.1.69/practice_api/${user["image_path"]}',
                                     candidateName: '${user["uname"]}',
                                   ),
                                 ),
                               );
                             },
                             child: Image.network(
-                              'http://192.168.1.65/practice_api/${user["image_path"]}',
+                              'http://192.168.1.69/practice_api/${user["image_path"]}',
                               width: 150,
                               height: 200,
                               fit: BoxFit.fill,
