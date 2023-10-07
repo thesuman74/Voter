@@ -29,7 +29,7 @@ class _SuccessPageState extends State<SuccessPage> {
       });
       // Auto-navigate to the next page after 5 seconds
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.pushNamed(context, 'home');
+        Navigator.pushNamed(context, '');
       });
     });
   }
@@ -38,7 +38,7 @@ class _SuccessPageState extends State<SuccessPage> {
     if (name != "") {
       print(name);
       try {
-        String uri = "http://192.168.1.70/practice_api/insert_vote.php";
+        String uri = "http://192.168.1.65/practice_api/insert_vote.php";
         var res = await http.post(Uri.parse(uri), body: {
           "name": name,
         });

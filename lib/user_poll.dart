@@ -20,7 +20,7 @@ class _user_poll_dataState extends State<user_poll_data> {
   bool isLoading = true; // Track whether data is loading
 
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.70/practice_api/view_poll.php";
+    String uri = "http://192.168.1.65/practice_api/view_poll.php";
     try {
       var response = await http.get(Uri.parse(uri));
 
@@ -49,7 +49,7 @@ class _user_poll_dataState extends State<user_poll_data> {
     // String validity = qrCodeArray[2];
     return Scaffold(
       appBar: AppBar(
-        title: const Text("view poll data"),
+        title: const Text("User poll data"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
