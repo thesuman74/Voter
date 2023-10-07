@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -11,6 +13,27 @@ class MyCustomWidget extends StatefulWidget {
 }
 
 class _MyCustomWidgetState extends State<MyCustomWidget> {
+  List Voterdata = [];
+  Future<void> getrecord() async {
+    String uri = "http://192.168.1.65/practice_api/check_voters.php";
+
+    try {
+      var response = await http.get(Uri.parse(uri));
+
+      setState(() {
+        Voterdata = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getrecord(); // Fetch data when the widget is created
+  }
+
   var getResult = 'QR Code Result';
 
   @override
@@ -54,12 +77,37 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                 onPressed: () async {
                   final result = await scanQRCode();
                   if (result != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => user_poll_data(result: result),
-                      ),
-                    );
+                    // Check if the name is present in Voterdata
+                    if (isNameInVoterdata(result)) {
+                      // Show a dialog for "Already Voted"
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Already Voted'),
+                            content: const Text(
+                                'You have already voted. You cannot vote again.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // Navigate to user_poll_data with the result
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              user_poll_data(result: result),
+                        ),
+                      );
+                    }
                   }
                 },
                 label: const Text(
@@ -101,5 +149,15 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
 
       return null;
     }
+  }
+
+  bool isNameInVoterdata(String nameToCheck) {
+    // Iterate through Voterdata to check if the name is present
+    for (var voter in Voterdata) {
+      if (voter["name"] == nameToCheck) {
+        return true;
+      }
+    }
+    return false;
   }
 }
