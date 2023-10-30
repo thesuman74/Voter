@@ -19,10 +19,13 @@
 
 ## Previews:
 ### One person One vote:
-- Once a person successfully votes a candidate, they cannot vote again  
-![onevote](https://github.com/thesuman74/Voter/assets/58351346/1e8ad568-5efb-4caa-8493-46840ba96932)
+- Once a person successfully votes a candidate, they cannot vote again
+
+![onevote](https://github.com/thesuman74/Voter/assets/58351346/9d46b3b1-dbec-43f0-bf2a-9ba464a7badc)
 
 
 ### Admin Area :
 - After logging in, admin can create polls, Add candidates, Edit candidates' Details, see total votes
-![admin](https://github.com/thesuman74/Voter/assets/58351346/0843cd12-b565-4e88-a98b-ad91ee4a5fa7)
+
+  
+![admin](https://github.com/thesuman74/Voter/assets/58351346/96165aa0-80f2-4265-9446-d56e6ee6c2fc)
