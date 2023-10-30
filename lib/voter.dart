@@ -39,7 +39,7 @@ class _MyVoterState extends State<MyVoter> {
                   child: Column(children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'candidates');
+                          Navigator.pushNamed(context, 'home');
                           null;
                         },
                         child: const Text(
@@ -54,12 +54,12 @@ class _MyVoterState extends State<MyVoter> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'login');
+                          Navigator.pushNamed(context, 'adminpoll');
                         },
                         child: const Text(
                           'Admin Click Here',
                           style: TextStyle(
-                            decoration: TextDecoration.underline,
+                            decoration: TextDecoration.none,
                             fontSize: 18,
                             color: Color(0xff4c505b),
                           ),

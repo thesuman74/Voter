@@ -1,6 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:voter/user_poll.dart';
 
 class MyCustomWidget extends StatefulWidget {
   const MyCustomWidget({Key? key}) : super(key: key);
@@ -10,6 +15,27 @@ class MyCustomWidget extends StatefulWidget {
 }
 
 class _MyCustomWidgetState extends State<MyCustomWidget> {
+  List Voterdata = [];
+  Future<void> getrecord() async {
+    String uri = "http://192.168.1.65/practice_api/check_voters.php";
+
+    try {
+      var response = await http.get(Uri.parse(uri));
+
+      setState(() {
+        Voterdata = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getrecord(); // Fetch data when the widget is created
+  }
+
   var getResult = 'QR Code Result';
 
   @override
@@ -53,12 +79,36 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                 onPressed: () async {
                   final result = await scanQRCode();
                   if (result != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NextScreen(result: result),
-                      ),
-                    );
+                    // Check if the name is present in Voterdata
+                    if (isNameInVoterdata(result)) {
+                      // Show a dialog for "Already Voted"
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Already Voted'),
+                            content: const Text(
+                                'You have already voted. You cannot vote again.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // Navigate to user_poll_data with the result
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => user_poll_data(result: result),
+                        ),
+                      );
+                    }
                   }
                 },
                 label: const Text(
@@ -101,57 +151,14 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
       return null;
     }
   }
-}
 
-class NextScreen extends StatelessWidget {
-  final String result;
-
-  const NextScreen({Key? key, required this.result}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    List<String> qrCodeArray = result.split(',');
-    String name = qrCodeArray[0];
-    String age = qrCodeArray[1];
-    String validity = qrCodeArray[2];
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Next Screen'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  "Welcome $name",
-                  style: const TextStyle(
-                      fontSize: 27,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Center(
-                child: Text(
-                  "Please read the details carefully.",
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black45,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Text(
-                    "Your QR code details are \n Name = $name \n Age = $age \n validity = $validity"),
-              ),
-            ],
-          ),
-        ));
+  bool isNameInVoterdata(String nameToCheck) {
+    // Iterate through Voterdata to check if the name is present
+    for (var voter in Voterdata) {
+      if (voter["name"] == nameToCheck) {
+        return true;
+      }
+    }
+    return false;
   }
 }

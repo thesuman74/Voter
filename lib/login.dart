@@ -90,7 +90,7 @@ class _MyLoginState extends State<MyLogin> {
                               child: const Text(
                                 'Register Here',
                                 style: TextStyle(
-                                  decoration: TextDecoration.underline,
+                                  decoration: TextDecoration.none,
                                   fontSize: 16,
                                   color: Color(0xff4c505b),
                                 ),
@@ -102,7 +102,7 @@ class _MyLoginState extends State<MyLogin> {
                               child: const Text(
                                 'For Voters Click Here',
                                 style: TextStyle(
-                                  decoration: TextDecoration.underline,
+                                  decoration: TextDecoration.none,
                                   fontSize: 16,
                                   color: Color(0xff4c505b),
                                 ),

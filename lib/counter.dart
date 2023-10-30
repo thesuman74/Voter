@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'data.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
 class MyCounter extends StatefulWidget {
-  const MyCounter({super.key});
+  const MyCounter({Key? key});
 
   @override
   State<MyCounter> createState() => _MyCounterState();
@@ -15,7 +14,7 @@ class _MyCounterState extends State<MyCounter> {
   List userdata = [];
 
   Future<void> getrecord() async {
-    String uri = "http://10.0.2.2/practice_api/view_data.php";
+    String uri = "http://192.168.1.65/practice_api/counter.php";
 
     try {
       var response = await http.get(Uri.parse(uri));
@@ -43,7 +42,7 @@ class _MyCounterState extends State<MyCounter> {
       body: Padding(
         padding: const EdgeInsets.only(left: 0, top: 5),
         child: ListView.builder(
-          itemCount: 6,
+          itemCount: userdata.length,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, index) => Container(
             width: MediaQuery.of(context).size.width,
@@ -73,7 +72,11 @@ class _MyCounterState extends State<MyCounter> {
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.green,
                             child: Stack(
-                              children: [Image.network(data[index]['image'])],
+                              children: [
+                                Image.asset(
+                                  'assets/candidate.jpg',
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -82,14 +85,14 @@ class _MyCounterState extends State<MyCounter> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              userdata[index]['uname'],
+                              userdata[index]['candidate_name'] ?? "null name",
                               style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              data[index]['post'],
+                              userdata[index]['post'] ?? "CEO",
                               style: const TextStyle(color: Colors.grey),
                             ),
                           ],
@@ -102,13 +105,8 @@ class _MyCounterState extends State<MyCounter> {
                         onPressed: () {
                           Navigator.pushNamed(context, '#');
                         },
-                        child: const Text(
-                          'votes',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 16,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
+                        child: Text(
+                          userdata[index]['votes'] ?? "null v",
                         ),
                       ),
                     ),

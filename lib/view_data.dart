@@ -18,7 +18,7 @@ class _view_dataState extends State<view_data> {
 
   Future<void> delrecord(String id) async {
     try {
-      String uri = "http://10.0.2.2/practice_api/delete_data.php";
+      String uri = "http://192.168.1.65/practice_api/delete_data.php";
 
       var res = await http.post(Uri.parse(uri), body: {"id": id});
       var response = jsonDecode(res.body);
@@ -40,7 +40,7 @@ class _view_dataState extends State<view_data> {
   }
 
   Future<void> getrecord() async {
-    String uri = "http://10.0.2.2/practice_api/view_data.php";
+    String uri = "http://192.168.1.65/practice_api/view_data.php";
 
     try {
       var response = await http.get(Uri.parse(uri));
@@ -84,7 +84,8 @@ class _view_dataState extends State<view_data> {
                 );
               },
               leading: Image.network(
-                'http://10.0.2.2/practice_api/' + userdata[index]["image_path"],
+                'http://192.168.1.65/practice_api/' +
+                    userdata[index]["image_path"],
                 width: 100, // Set the width as needed
                 height: 100, // Set the height as needed
                 fit: BoxFit

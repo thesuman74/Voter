@@ -1,97 +1,133 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'data.dart'; // Assuming you have a file named 'data.dart' with your data
+import 'package:http/http.dart' as http;
+import 'package:voter/success_data.dart';
 
 class Candidates extends StatefulWidget {
-  const Candidates({Key? key});
+  String? passedValue;
+  String? result;
+
+  Candidates({this.passedValue, this.result, Key? key}) : super(key: key);
 
   @override
   State<Candidates> createState() => _CandidatesState();
 }
 
 class _CandidatesState extends State<Candidates> {
+  List userdata = [];
+  Future<void> getrecord(String? passedValue) async {
+    // Check if passedValue is not null or empty before making the request
+    if (passedValue != null && passedValue.isNotEmpty) {
+      String uri = "http://192.168.1.65/practice_api/user_poll.php";
+      try {
+        var res = await http.post(Uri.parse(uri), body: {
+          "passedValue": passedValue,
+        });
+
+        var response = jsonDecode(res.body);
+
+        setState(() {
+          userdata = response;
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Call getrecord with the passedValue from the widget
+    getrecord(widget.passedValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 105, top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Welcome Ashish ',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
-                  ),
-                ],
+      appBar: AppBar(
+        title: const Text("Candidates"),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              widget.result ?? "", // Add this line to display the 'result' text
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.65,
-                  ),
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    Color? backgroundColor;
-                    if (data[index]['color'] != null) {
-                      backgroundColor =
-                          Color(int.tryParse(data[index]['color']) ?? 0);
-                    } else {
-                      // If color is null or not a valid int, use a default color.
-                      backgroundColor = Colors.grey;
-                    }
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: backgroundColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Stack(
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: (userdata.length / 2).ceil(),
+              itemBuilder: (context, index) {
+                int startIndex = index * 2;
+                int endIndex = startIndex + 2 > userdata.length
+                    ? userdata.length
+                    : startIndex + 2;
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    endIndex - startIndex,
+                    (cardIndex) {
+                      var user = userdata[startIndex + cardIndex];
+                      return Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16.0),
+                            child: Column(
                               children: [
-                                Image.network(data[index]['image'] ?? '')
-                              ], // Provide a default empty string in case 'image' is null
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SuccessPage(
+                                          imageValue:
+                                              'http://192.168.1.65/practice_api/${user["image_path"]}',
+                                          candidateName: '${user["uname"]}',
+                                          voter: widget.result ?? "",
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Image.network(
+                                    'http://192.168.1.65/practice_api/${user["image_path"]}',
+                                    width: 150,
+                                    height: 200,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Text(
+                                  '${user["uname"]}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
-                        Text(
-                          data[index]['name'] ??
-                              '', // Provide a default empty string in case 'name' is null
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'success');
-                          },
-                          child: const Text(
-                            'Click Here To Vote',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

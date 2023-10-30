@@ -2,7 +2,7 @@
 include("dbconnection.php");
 $con = dbconnection();
 
-$query = "SELECT `id`, `uname`, `uemail`, `upassword`, `image_path` FROM `user_table` ";
+$query = "SELECT * FROM `voters_table` ORDER BY votes DESC";
 $exe = mysqli_query($con, $query); // Use mysqli_query to execute the query
 
 $arr = [];
@@ -12,4 +12,3 @@ while ($row = mysqli_fetch_array($exe)) { // Loop through the result set
 }
 
 print(json_encode($arr));
-            
